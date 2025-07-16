@@ -34,10 +34,6 @@
     }
 }
 
-@utility flex-center {
-    @apply flex items-center justify-center;
-}
-
 html,
 body {
     width: 100%;
@@ -45,6 +41,10 @@ body {
     color: white;
     scroll-behavior: smooth;
     overflow-x: hidden;
+}
+
+@utility flex-center {
+    @apply flex items-center justify-center;
 }
 
 @utility col-center {
