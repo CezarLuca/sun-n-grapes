@@ -1,6 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Mona+Sans:ital,wght@0,200..900;1,200..900&display=swap");
 
-@import "tailwindcss";
+@import "tailwindcss/preflight";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 @font-face {
     font-family: "Modern Negra";
@@ -10,9 +12,6 @@
 :root {
     --background: #ffffff;
     --foreground: #171717;
-}
-
-@theme {
     --color-yellow: #e7d393;
     --color-white-100: #efefef;
     --font-sans: "Mona Sans", sans-serif;
@@ -20,25 +19,23 @@
     --font-serif: "DM Serif Text", serif;
 }
 
-@theme inline {
-    --color-background: var(--background);
-    --color-foreground: var(--foreground);
-    --font-sans: var(--font-geist-sans);
-    --font-mono: var(--font-geist-mono);
-}
-
 @media (prefers-color-scheme: dark) {
     :root {
         --background: #0a0a0a;
         --foreground: #ededed;
+        background-color: var(--background);
+        color: var(--foreground);
+        scroll-behavior: smooth;
+        overflow-x: hidden;
     }
 }
 
 html,
 body {
     width: 100%;
-    background-color: black;
-    color: white;
+    /* These were hardcoded. Changed to use the CSS variables for theme support. */
+    background-color: var(--background);
+    color: var(--foreground);
     scroll-behavior: smooth;
     overflow-x: hidden;
 }
