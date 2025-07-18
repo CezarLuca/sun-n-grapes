@@ -1,3 +1,9 @@
+import LandingSection from "@/sections/LandingSection";
+
 export default function Home() {
-    return <main></main>;
+    return (
+        <main>
+            <LandingSection />
+        </main>
+    );
 }
