@@ -1,7 +1,10 @@
+"use client";
+
 import { navLinks } from "@/app/constants";
 import Image from "next/image";
 import Link from "next/link";
 import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 
 const Navbar = () => {
     useGSAP(() => {
