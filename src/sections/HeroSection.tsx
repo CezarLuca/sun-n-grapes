@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import gsap from "gsap";
 import { ScrollTrigger, SplitText } from "gsap/all";
+import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -25,6 +26,14 @@ const HeroSection = () => {
                         <p className="subtitle">
                             Sip the Spirit <br /> of Summer
                         </p>
+                    </div>
+                    <div className="view-cocktails">
+                        <p className="subtitle">
+                            Every cocktail on our menu is a blend of premium
+                            ingredients, creative flair, and timeless recipes -
+                            designed to delight your senses.
+                        </p>
+                        <Link href={`#cocktails`}>View Cocktails</Link>
                     </div>
                 </div>
             </div>
