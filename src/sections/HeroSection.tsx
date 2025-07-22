@@ -2,10 +2,28 @@
 import gsap from "gsap";
 import { ScrollTrigger, SplitText } from "gsap/all";
 import Link from "next/link";
+import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
 const HeroSection = () => {
+    useGSAP(() => {
+        const split = new SplitText(".title", { type: "lines" });
+        gsap.from(split.lines, {
+            scrollTrigger: {
+                trigger: ".title",
+                start: "top 80%",
+            },
+            y: 50,
+            opacity: 0,
+            duration: 1,
+            stagger: 0.1,
+        });
+
+        return () => {
+            split.revert();
+        };
+    }, []);
     return (
         <section id="hero" className="noisy">
             <h1 className="title">Grapes n&apos; Sun</h1>
