@@ -8,22 +8,28 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 
 const HeroSection = () => {
     useGSAP(() => {
-        const split = new SplitText(".title", { type: "lines" });
-        gsap.from(split.lines, {
-            scrollTrigger: {
-                trigger: ".title",
-                start: "top 80%",
-            },
-            y: 50,
-            opacity: 0,
-            duration: 1,
-            stagger: 0.1,
+        const heroSplit = new SplitText(".title", { type: "chars, words" });
+        const paragraphSplit = new SplitText(".subtitle", { type: "lines" });
+
+        heroSplit.chars.forEach((char) => char.classList.add("text-gradient"));
+
+        gsap.from(heroSplit.chars, {
+            yPercent: 100,
+            duration: 1.8,
+            ease: "expo.out",
+            stagger: 0.05,
         });
 
-        return () => {
-            split.revert();
-        };
+        gsap.from(paragraphSplit.lines, {
+            opacity: 0,
+            yPercent: 100,
+            duration: 1.8,
+            ease: "expo.out",
+            stagger: 0.06,
+            delay: 1,
+        });
     }, []);
+
     return (
         <section id="hero" className="noisy">
             <h1 className="title">Grapes n&apos; Sun</h1>
