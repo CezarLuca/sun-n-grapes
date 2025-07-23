@@ -19,10 +19,11 @@ const Navbar = () => {
             "nav",
             {
                 backgroundColor: "transparent",
+                backdropFilter: "blur(0px)",
             },
             {
-                backgroundColor: "#0000050",
-                backgroundFilter: "blur(10px)",
+                backgroundColor: "rgba(0, 0, 0, 0.5)",
+                backdropFilter: "blur(10px)",
                 duration: 1,
                 ease: "power1.inOut",
             }

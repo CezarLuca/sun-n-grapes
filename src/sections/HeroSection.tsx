@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+"use client";
 import gsap from "gsap";
 import { ScrollTrigger, SplitText } from "gsap/all";
 import Link from "next/link";
@@ -28,6 +29,17 @@ const HeroSection = () => {
             stagger: 0.06,
             delay: 1,
         });
+
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: "#hero",
+                start: "top top",
+                end: "bottom top",
+                scrub: 1,
+            },
+        })
+            .to(".right-leaf", { y: 200 }, 0)
+            .to(".left-leaf", { y: -200 }, 0);
     }, []);
 
     return (
