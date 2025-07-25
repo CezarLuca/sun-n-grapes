@@ -11,6 +11,7 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 
 const HeroSection = () => {
     const videoRef = useRef<HTMLVideoElement>(null);
+    const videoTimelineRef = useRef<gsap.core.Timeline | null>(null);
     const isMobile = useMediaQuery({ maxWidth: 768 });
 
     useGSAP(() => {
@@ -48,6 +49,31 @@ const HeroSection = () => {
 
         const startValue = isMobile ? "top 50%" : "center 60%";
         const endValue = isMobile ? "120% top" : "bottom top";
+
+        videoTimelineRef.current = gsap
+            .timeline({
+                scrollTrigger: {
+                    trigger: "video",
+                    start: startValue,
+                    end: endValue,
+                    scrub: 1,
+                    pin: true,
+                    onEnter: () => videoRef.current?.play(),
+                    onEnterBack: () => videoRef.current?.play(),
+                    onLeave: () => videoRef.current?.pause(),
+                    onLeaveBack: () => videoRef.current?.pause(),
+                },
+            })
+            .fromTo(
+                videoRef.current,
+                {
+                    scale: isMobile ? 1.2 : 1.5,
+                },
+                {
+                    scale: 1,
+                    ease: "none",
+                }
+            );
     }, []);
 
     return (
