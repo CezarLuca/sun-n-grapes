@@ -1,85 +1,108 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import gsap from "gsap";
-import { ScrollTrigger, SplitText } from "gsap/all";
-import Link from "next/link";
+
 import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { SplitText } from "gsap/all";
 import { useRef } from "react";
 import { useMediaQuery } from "react-responsive";
 
-gsap.registerPlugin(ScrollTrigger, SplitText);
+const Hero = () => {
+    const videoRef = useRef<HTMLVideoElement | null>(null);
 
-const HeroSection = () => {
-    const videoRef = useRef<HTMLVideoElement>(null);
-    const videoTimelineRef = useRef<gsap.core.Timeline | null>(null);
-    const isMobile = useMediaQuery({ maxWidth: 768 });
+    const isMobile = useMediaQuery({ maxWidth: 767 });
 
     useGSAP(() => {
-        const heroSplit = new SplitText(".title", { type: "chars, words" });
-        const paragraphSplit = new SplitText(".subtitle", { type: "lines" });
+        // Wait for all fonts to be loaded before running SplitText
+        (
+            document as Document & { fonts?: { ready: Promise<void> } }
+        ).fonts?.ready.then(() => {
+            const heroSplit = new SplitText(".title", {
+                type: "chars, words",
+            });
 
-        heroSplit.chars.forEach((char) => char.classList.add("text-gradient"));
+            const paragraphSplit = new SplitText(".subtitle", {
+                type: "lines",
+            });
 
-        gsap.from(heroSplit.chars, {
-            yPercent: 100,
-            duration: 1.8,
-            ease: "expo.out",
-            stagger: 0.05,
-        });
+            // Apply text-gradient class once before animating
+            heroSplit.chars.forEach((char) =>
+                char.classList.add("text-gradient")
+            );
 
-        gsap.from(paragraphSplit.lines, {
-            opacity: 0,
-            yPercent: 100,
-            duration: 1.8,
-            ease: "expo.out",
-            stagger: 0.06,
-            delay: 1,
-        });
+            gsap.from(heroSplit.chars, {
+                yPercent: 100,
+                duration: 1.8,
+                ease: "expo.out",
+                stagger: 0.06,
+            });
 
-        gsap.timeline({
-            scrollTrigger: {
-                trigger: "#hero",
-                start: "top top",
-                end: "bottom top",
-                scrub: 1,
-            },
-        })
-            .to(".right-leaf", { y: 200 }, 0)
-            .to(".left-leaf", { y: -200 }, 0);
+            gsap.from(paragraphSplit.lines, {
+                opacity: 0,
+                yPercent: 100,
+                duration: 1.8,
+                ease: "expo.out",
+                stagger: 0.06,
+                delay: 1,
+            });
 
-        const startValue = isMobile ? "top 50%" : "center 60%";
-        const endValue = isMobile ? "120% top" : "bottom top";
-
-        videoTimelineRef.current = gsap
-            .timeline({
+            gsap.timeline({
                 scrollTrigger: {
-                    trigger: "video",
-                    start: startValue,
-                    end: endValue,
-                    scrub: 1,
-                    pin: true,
-                    onEnter: () => videoRef.current?.play(),
-                    onEnterBack: () => videoRef.current?.play(),
-                    onLeave: () => videoRef.current?.pause(),
-                    onLeaveBack: () => videoRef.current?.pause(),
+                    trigger: "#hero",
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: true,
                 },
             })
-            .fromTo(
-                videoRef.current,
-                {
-                    scale: isMobile ? 1.2 : 1.5,
-                },
-                {
-                    scale: 1,
+                .to(".right-leaf", { y: 200 }, 0)
+                .to(".left-leaf", { y: -200 }, 0)
+                .to(".arrow", { y: 100 }, 0);
+
+            // const startValue = isMobile ? "top 50%" : "center 60%";
+            // const endValue = isMobile ? "120% top" : "bottom top";
+
+            // const tl = gsap.timeline({
+            //     scrollTrigger: {
+            //         trigger: "video",
+            //         start: startValue,
+            //         end: endValue,
+            //         scrub: true,
+            //         pin: true,
+            //     },
+            // });
+
+            const setupVideoTimeline = () => {
+                if (!videoRef.current) return;
+                const duration = videoRef.current.duration || 1;
+                gsap.timeline({
+                    scrollTrigger: {
+                        trigger: ".hero-video",
+                        start: isMobile ? "top 50%" : "center 60%",
+                        end: isMobile ? "120% top" : "bottom top",
+                        scrub: true,
+                        pin: true,
+                    },
+                }).to(videoRef.current, {
+                    currentTime: duration,
                     ease: "none",
+                });
+            };
+
+            if (videoRef.current) {
+                if (videoRef.current.readyState >= 1) {
+                    setupVideoTimeline();
+                } else {
+                    videoRef.current.onloadedmetadata = setupVideoTimeline;
                 }
-            );
+            }
+        });
     }, []);
 
     return (
         <>
             <section id="hero" className="noisy">
-                <h1 className="title">Grapes n&apos; Sun</h1>
+                <h1 className="title">MOJITO</h1>
+
                 <img
                     src="/images/hero-left-leaf.png"
                     alt="left-leaf"
@@ -90,7 +113,14 @@ const HeroSection = () => {
                     alt="right-leaf"
                     className="right-leaf"
                 />
+
                 <div className="body">
+                    <img
+                        src="/images/arrow.png"
+                        alt="arrow"
+                        className="arrow"
+                    />
+
                     <div className="content">
                         <div className="space-y-5 hidden md:block">
                             <p>Cool. Crisp. Classic.</p>
@@ -98,28 +128,31 @@ const HeroSection = () => {
                                 Sip the Spirit <br /> of Summer
                             </p>
                         </div>
+
                         <div className="view-cocktails">
                             <p className="subtitle">
                                 Every cocktail on our menu is a blend of premium
                                 ingredients, creative flair, and timeless
-                                recipes - designed to delight your senses.
+                                recipes — designed to delight your senses.
                             </p>
-                            <Link href={`#cocktails`}>View Cocktails</Link>
+                            <a href="#cocktails">View cocktails</a>
                         </div>
                     </div>
                 </div>
             </section>
+
             <div className="video absolute inset-0">
                 <video
                     ref={videoRef}
-                    src="/videos/input.mp4"
+                    className="hero-video"
                     muted
                     playsInline
                     preload="auto"
+                    src="/videos/output.mp4"
                 />
             </div>
         </>
     );
 };
 
-export default HeroSection;
+export default Hero;
