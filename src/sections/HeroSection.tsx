@@ -104,12 +104,12 @@ const Hero = () => {
                 <h1 className="title">Sun &apos;n Grapes</h1>
 
                 <img
-                    src="/images/hero-left-leaf.png"
+                    src="/images/Vine-1-Left.png"
                     alt="left-leaf"
                     className="left-leaf"
                 />
                 <img
-                    src="/images/hero-right-leaf.png"
+                    src="/images/Vine-7-Right.png"
                     alt="right-leaf"
                     className="right-leaf"
                 />
