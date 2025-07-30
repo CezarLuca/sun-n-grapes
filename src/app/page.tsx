@@ -1,5 +1,6 @@
 "use client";
 
+import About from "@/components/About";
 import Cocktails from "@/components/Cocktails";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/sections/HeroSection";
@@ -14,6 +15,7 @@ export default function Home() {
             <Navbar />
             <HeroSection />
             <Cocktails />
+            <About />
         </main>
     );
 }
