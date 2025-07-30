@@ -58,19 +58,6 @@ const Hero = () => {
                 .to(".left-leaf", { y: -200 }, 0)
                 .to(".arrow", { y: 100 }, 0);
 
-            // const startValue = isMobile ? "top 50%" : "center 60%";
-            // const endValue = isMobile ? "120% top" : "bottom top";
-
-            // const tl = gsap.timeline({
-            //     scrollTrigger: {
-            //         trigger: "video",
-            //         start: startValue,
-            //         end: endValue,
-            //         scrub: true,
-            //         pin: true,
-            //     },
-            // });
-
             const setupVideoTimeline = () => {
                 if (!videoRef.current) return;
                 const duration = videoRef.current.duration || 1;
