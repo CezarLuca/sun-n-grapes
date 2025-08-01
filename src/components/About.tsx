@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 const About = () => {
     return (
         <div id="about">
@@ -27,10 +28,16 @@ const About = () => {
                                 <span>4.5</span>/5
                             </p>
                             <p className="text-sm text-white-100">
-                                More than +12000 customers
+                                More than +12000 customers happy
                             </p>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div className="top-grid">
+                <div className="md:col-span-3">
+                    <div className="noisy" />
+                    <img src="/images/abt1.png" alt="grid-img-1" />
                 </div>
             </div>
         </div>
