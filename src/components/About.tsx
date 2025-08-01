@@ -39,6 +39,14 @@ const About = () => {
                     <div className="noisy" />
                     <img src="/images/abt1.png" alt="grid-img-1" />
                 </div>
+                <div className="md:col-span-6">
+                    <div className="noisy" />
+                    <img src="/images/abt2.png" alt="grid-img-2" />
+                </div>
+                <div className="md:col-span-3">
+                    <div className="noisy" />
+                    <img src="/images/abt5.png" alt="grid-img-5" />
+                </div>
             </div>
         </div>
     );
