@@ -1,6 +1,7 @@
 "use client";
 
 import About from "@/components/About";
+import Art from "@/components/Art";
 import Cocktails from "@/components/Cocktails";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/sections/HeroSection";
@@ -16,6 +17,7 @@ export default function Home() {
             <HeroSection />
             <Cocktails />
             <About />
+            <Art />
         </main>
     );
 }
