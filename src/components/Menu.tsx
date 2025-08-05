@@ -47,6 +47,32 @@ const Menu = () => {
                     );
                 })}
             </nav>
+            <div className="content">
+                <div className="arrow">
+                    <button
+                        className="text-left"
+                        onClick={() => goToSlide(currentIndex - 1)}
+                    >
+                        <span>prevCocktailName</span>
+                        <img
+                            src="/images/right-arrow.png"
+                            alt="right-arrow"
+                            aria-hidden="true"
+                        />
+                    </button>
+                    <button
+                        className="text-left"
+                        onClick={() => goToSlide(currentIndex + 1)}
+                    >
+                        <span>nextCocktailName</span>
+                        <img
+                            src="/images/left-arrow.png"
+                            alt="left-arrow"
+                            aria-hidden="true"
+                        />
+                    </button>
+                </div>
+            </div>
         </section>
     );
 };
