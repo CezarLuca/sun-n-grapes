@@ -1,3 +1,5 @@
+"use client";
+
 import { featureLists, goodLists } from "@/app/constants";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
@@ -13,7 +15,7 @@ const Art = () => {
         const maskTimeline = gsap.timeline({
             scrollTrigger: {
                 trigger: "#art",
-                start: start,
+                start,
                 end: "bottom center",
                 scrub: 1.5,
                 pin: true,
@@ -22,7 +24,7 @@ const Art = () => {
 
         maskTimeline
             .to(".will-fade", {
-                opacity: 1,
+                opacity: 0,
                 stagger: 0.2,
                 ease: "power1.inOut",
             })
@@ -39,10 +41,12 @@ const Art = () => {
                 ease: "power1.inOut",
             });
     });
+
     return (
         <div id="art">
             <div className="container mx-auto h-full pt-20">
                 <h2 className="will-fade">The ART</h2>
+
                 <div className="content">
                     <ul className="space-y-4 will-fade">
                         {goodLists.map((feature, index) => (
@@ -52,6 +56,7 @@ const Art = () => {
                             </li>
                         ))}
                     </ul>
+
                     <div className="cocktail-img">
                         <img
                             src="/images/under-img.jpg"
@@ -59,6 +64,7 @@ const Art = () => {
                             className="abs-center masked-img size-full object-contain"
                         />
                     </div>
+
                     <ul className="space-y-4 will-fade">
                         {featureLists.map((feature, index) => (
                             <li
@@ -71,6 +77,7 @@ const Art = () => {
                         ))}
                     </ul>
                 </div>
+
                 <div className="masked-container">
                     <h2 className="will-fade">Sip-Worthy Perfection</h2>
                     <div id="masked-content">

@@ -1,8 +1,19 @@
 "use client";
 
+import { sliderLists } from "@/app/constants";
+import { useState } from "react";
+
 /* eslint-disable @next/next/no-img-element */
 
 const Menu = () => {
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const totalCocktails = sliderLists.length;
+
+    const goToSlide = (index: number) => {
+        const newIndex = (index + totalCocktails) % totalCocktails;
+        setCurrentIndex(newIndex);
+    };
+
     return (
         <section id="menu" aria-labelledby="menu-heading">
             <img
@@ -18,6 +29,24 @@ const Menu = () => {
             <h2 id="menu-heading" className="sr-only">
                 Cocktail Menu
             </h2>
+            <nav className="cocktail-tabs" aria-label="Cocktail Navigation">
+                {sliderLists.map((cocktail, index) => {
+                    const isActive = index === currentIndex;
+                    return (
+                        <button
+                            key={cocktail.id}
+                            className={`${
+                                isActive
+                                    ? "text-white border-white"
+                                    : "text-white/50 border-white/50"
+                            }`}
+                            onClick={() => goToSlide(index)}
+                        >
+                            {cocktail.name}
+                        </button>
+                    );
+                })}
+            </nav>
         </section>
     );
 };

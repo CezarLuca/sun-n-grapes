@@ -3,6 +3,7 @@
 import About from "@/components/About";
 import Art from "@/components/Art";
 import Cocktails from "@/components/Cocktails";
+import Menu from "@/components/Menu";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/sections/HeroSection";
 import gsap from "gsap";
@@ -18,6 +19,7 @@ export default function Home() {
             <Cocktails />
             <About />
             <Art />
+            <Menu />
         </main>
     );
 }
