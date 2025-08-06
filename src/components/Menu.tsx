@@ -1,11 +1,12 @@
 "use client";
 
 import { sliderLists } from "@/app/constants";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 /* eslint-disable @next/next/no-img-element */
 
 const Menu = () => {
+    const contentRef = useRef<HTMLDivElement>(null);
     const [currentIndex, setCurrentIndex] = useState(0);
     const totalCocktails = sliderLists.length;
 
@@ -58,7 +59,7 @@ const Menu = () => {
                 })}
             </nav>
             <div className="content">
-                <div className="arrow">
+                <div className="arrows">
                     <button
                         className="text-left"
                         onClick={() => goToSlide(currentIndex - 1)}
@@ -88,6 +89,16 @@ const Menu = () => {
                         alt={currentCocktail.name}
                         className="object-contain"
                     />
+                </div>
+                <div className="recipe">
+                    <div ref={contentRef} className="info">
+                        <p>Recipe for:</p>
+                        <p id="title">{currentCocktail.name}</p>
+                    </div>
+                    <div className="details">
+                        <h2>{currentCocktail.title}</h2>
+                        <p>{currentCocktail.description}</p>
+                    </div>
                 </div>
             </div>
         </section>
