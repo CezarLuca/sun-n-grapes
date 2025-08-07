@@ -1,6 +1,8 @@
 "use client";
 
 import { sliderLists } from "@/app/constants";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 import { useRef, useState } from "react";
 
 /* eslint-disable @next/next/no-img-element */
@@ -8,6 +10,26 @@ import { useRef, useState } from "react";
 const Menu = () => {
     const contentRef = useRef<HTMLDivElement>(null);
     const [currentIndex, setCurrentIndex] = useState(0);
+
+    useGSAP(() => {
+        gsap.fromTo("#title", { opacity: 0 }, { opacity: 100, duration: 1 });
+        gsap.fromTo(
+            ".cocktail img",
+            { opacity: 0, xPercent: -100 },
+            { xPercent: 0, opacity: 100, duration: 1, ease: "power1.inOut" }
+        );
+        gsap.fromTo(
+            ".details h2",
+            { opacity: 0, yPercent: 100 },
+            { opacity: 100, yPercent: 0, ease: "power1.inOut" }
+        );
+        gsap.fromTo(
+            ".details p",
+            { opacity: 0, yPercent: 100 },
+            { opacity: 100, yPercent: 0, ease: "power1.inOut" }
+        );
+    }, [currentIndex]);
+
     const totalCocktails = sliderLists.length;
 
     const goToSlide = (index: number) => {
