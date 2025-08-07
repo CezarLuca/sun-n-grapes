@@ -3,6 +3,7 @@
 import About from "@/components/About";
 import Art from "@/components/Art";
 import Cocktails from "@/components/Cocktails";
+import Contact from "@/components/Contact";
 import Menu from "@/components/Menu";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/sections/HeroSection";
@@ -20,6 +21,7 @@ export default function Home() {
             <About />
             <Art />
             <Menu />
+            <Contact />
         </main>
     );
 }
